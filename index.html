@@ -1,11 +1,119 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Mi Primera Página</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Club de Pádel PuertoPadel</title>
+  <style>
+    /* Fuente general y reseteo */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #fff;
+      background: url('portada_padel.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    header {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 100px 20px;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 20px;
+    }
+
+    .btn {
+      margin-top: 20px;
+      display: inline-block;
+      padding: 12px 24px;
+      background-color: #ff6600;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+    }
+
+    .seccion {
+      background-color: rgba(0, 0, 0, 0.6);
+      margin: 40px auto;
+      padding: 20px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 1000px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+  </style>
 </head>
 <body>
-  <h1>¡Hola soy Iker!</h1>
-  <p>Esta es mi primera página web.</p>
+
+  <header>
+    <h2>Club de Pádel PuertoPadel</h2>
+    <nav>
+      <a href="#quienes">Quiénes Somos</a>
+      <a href="#caracteristicas">Características</a>
+      <a href="#precios">Precios</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Vive el pádel al máximo</h1>
+    <p>Tu club de pádel de confianza. Moderno, profesional y amigable.</p>
+    <a class="btn" href="#quienes">Ven a conocernos</a>
+  </section>
+
+  <section class="seccion" id="quienes">
+    <h2>Quiénes Somos</h2>
+    <p>Somos un club deportivo dedicado al pádel, con instalaciones modernas, entrenadores certificados y un ambiente único para todos los niveles.</p>
+  </section>
+
+  <section class="seccion" id="caracteristicas">
+    <h2>Características</h2>
+    <ul>
+      <li>Pistas cubiertas y al aire libre</li>
+      <li>Gimnasio y área de recuperación</li>
+      <li>Eventos mensuales y torneos</li>
+    </ul>
+  </section>
+
+  <section class="seccion" id="precios">
+    <h2>Precios</h2>
+    <p>Consulta nuestras opciones de membresía: mensual, trimestral o anual. También puedes reservar pistas por hora.</p>
+  </section>
+
+  <section class="seccion" id="contacto">
+    <h2>Contacto</h2>
+    <p>Email: contacto@puertopadel.com</p>
+    <p>Teléfono: +34 600 123 456</p>
+  </section>
+
+  <footer>
+    &copy; 2025 Club de Pádel PuertoPadel. Todos los derechos reservados.
+  </footer>
+
 </body>
 </html>
