@@ -1,119 +1,535 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Club de Pádel PuertoPadel</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PuertoPádel</title>
+  <link rel="stylesheet" href="estilos.css">
   <style>
-    /* Fuente general y reseteo */
-    body {
+    /* ===== RESET ===== */
+    * {
+      box-sizing: border-box;
       margin: 0;
+      padding: 0;
       font-family: Arial, sans-serif;
-      color: #fff;
-      background: url('portada_padel.jpg') no-repeat center center fixed;
-      background-size: cover;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #f5f5f5;
+      color: #333;
+    }
+
+    /* ===== NAVBAR ===== */
+    .navbar {
+      position: fixed;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 10px 0;
+      z-index: 1000;
+      top: 0;
+    }
+
+    .navbar ul {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      list-style: none;
+      padding: 0;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .navbar a:hover {
+      text-decoration: underline;
+    }
+
+    /* ===== HEADER ===== */
     header {
-      background-color: rgba(0, 0, 0, 0.7);
-      padding: 20px;
+      background: url('portada_padel.jpeg') center/cover no-repeat;
+      height: 60vh;
+      display: flex;
+      flex-direction: column; /* Para apilar h1 y p */
+      align-items: center;
+      justify-content: flex-start; /* ⬆️ Alinea arriba */
+      padding-top: 120px; /* Ajusta el espacio superior */
       text-align: center;
     }
 
-    nav a {
-      color: white;
-      margin: 0 15px;
-      text-decoration: none;
+    header h1 {
+      font-size: 3rem;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: rgb(255, 255, 255);
+      padding: 1rem 2rem;
+      border-radius: 5px;
+    }
+
+    header p {
+      font-size: 1.5rem;
+      color: rgb(255, 255, 255);
+      padding: 0.5rem 1.5rem;
+      border-radius: 5px;
       font-weight: bold;
     }
 
-    .hero {
-      text-align: center;
-      padding: 100px 20px;
-      background-color: rgba(0, 0, 0, 0.5);
-    }
-
-    .hero h1 {
-      font-size: 48px;
-      margin-bottom: 10px;
-    }
-
-    .hero p {
-      font-size: 20px;
-    }
-
-    .btn {
-      margin-top: 20px;
+    .btn-descargar-horario {
       display: inline-block;
-      padding: 12px 24px;
-      background-color: #ff6600;
+      margin-top: 1.5rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #007bff;
       color: white;
       text-decoration: none;
-      border-radius: 6px;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
     }
 
-    .seccion {
-      background-color: rgba(0, 0, 0, 0.6);
-      margin: 40px auto;
+    .btn-descargar-horario:hover {
+      background-color: #0056b3;
+    }
+
+    /* ===== SECCIONES ===== */
+    main section {
+      padding: 4rem 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    main section h2 {
+      text-align: flex-start;
+      margin-bottom: 1rem;
+    }
+
+
+    .sobre-gimnasio {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 30px;
+      background-color: #f9f9f9;
+    }
+
+    .sobre-gimnasio .texto,
+    .sobre-gimnasio .beneficios {
+      flex: 1 1 300px;
+    }
+
+    .beneficios h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    .beneficios p {
+      margin-bottom: 1rem; /* Espacio después de cada párrafo */
+    }
+
+    .cta-btn {
+      background-color: #222;
+      color: white;
+      padding: 1rem 2rem;
+      display: inline-block;
+      margin-top: 1rem;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+
+    .servicios {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-around;
+    }
+
+    .servicio {
+      text-align: center;
+      flex: 1 1 200px;
+    }
+
+    .servicio img {
+      width: 100%;
+      max-width: 250px;
+      border-radius: 8px;
+    }
+
+    .actividades {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-around;
+    }
+
+    .actividad {
+      text-align: center;
+      flex: 1 1 200px;
+    }
+
+    .actividad img {
+      width: 100%;
+      max-width: 250px;
+      border-radius: 8px;
+    }
+
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
       padding: 20px;
-      border-radius: 12px;
-      width: 90%;
-      max-width: 1000px;
     }
 
+    .galeria img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .galeria img:hover {
+      transform: scale(1.05);
+    }
+
+    /* ===== MODAL GALERÍA ===== */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.8);
+    }
+
+    .modal-contenido {
+      margin: auto;
+      display: block;
+      max-width: 80%;
+      max-height: 80%;
+      margin-top: 5%;
+    }
+
+    .cerrar {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* ===== PRECIOS ===== */
+    .precios {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin-bottom: 2rem;
+    }
+
+    .plan {
+      background-color: #f0f0f0;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      flex: 1 1 250px;
+      width: 250px;
+      text-align: center;
+    }
+
+    /* Colores diferentes */
+    .precios-pistas .plan {
+      background-color: #d4f5d2; /* verde claro */
+    }
+
+    .precios-clases .plan {
+      background-color: #d2e9f5; /* azul claro */
+    }
+
+    /* Botón */
+    .cta-btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1.2rem;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    .cta-btn:hover {
+      background-color: #0056b3;
+    }
+
+    /* ===== MAPA ===== */
+    .mapa {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .mapa iframe {
+      flex: 1 1 400px;
+      width: 100%;
+      height: 300px;
+      border: 0;
+      border-radius: 10px;
+    }
+
+    /* ===== FOOTER ===== */
     footer {
       text-align: center;
       padding: 20px;
       background-color: rgba(0, 0, 0, 0.8);
+      color: white;
     }
+
+      @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  header p {
+    animation: fadeInUp 3s ease forwards;
+  }
+
+  header p {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    animation-delay: 0s;
+  }
+
   </style>
 </head>
 <body>
+  <nav class="navbar">
+    <ul>
+      <li><a href="#sobre-gimnasio">Quiénes somos</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#actividades">Actividades</a></li>
+      <li><a href="#galeria">Galería</a></li>
+      <li><a href="#precios">Precios</a></li>
+      <li><a href="#mapa">Ubicación</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+      <li><a href="miembros.html">Miembros</a></li>
+    </ul>
+  </nav>
 
   <header>
-    <h2>Club de Pádel PuertoPadel</h2>
-    <nav>
-      <a href="#quienes">Quiénes Somos</a>
-      <a href="#caracteristicas">Características</a>
-      <a href="#precios">Precios</a>
-      <a href="#contacto">Contacto</a>
-    </nav>
+    <h1>Bienvenido a PuertoPádel</h1>
+    <p>"Pádel sin límites, sólo en PuertoPádel"</p>
+    <a href="horario.png" target="_blank" download class="btn-descargar-horario">Descargar horario del club</a>
   </header>
 
-  <section class="hero">
-    <h1>Vive el pádel al máximo</h1>
-    <p>Tu club de pádel de confianza. Moderno, profesional y amigable.</p>
-    <a class="btn" href="#quienes">Ven a conocernos</a>
-  </section>
+  <main>
+    <section class="sobre-gimnasio" id="sobre-gimnasio">
+      <div class="texto">
+        <h2>Sobre nuestro club</h2>
+        <p>En PuertoPádel, vivimos el pádel con pasión. Nuestro club ofrece instalaciones modernas, ambiente familiar y un equipo comprometido con fomentar el deporte a todos los niveles. Ya seas principiante o jugador experimentado, aquí encontrarás el lugar perfecto para entrenar, competir y disfrutar. ¡Únete a nuestra comunidad y forma parte de la experiencia Puertopadel!</p>
+        <a href="#precios" class="cta-btn">Reserva tu pista</a>
+      </div>
+      <div class="beneficios">
+        <h3>Equipo y espacio de última generación</h3>
+        <p>Contamos con la mejor infraestructura.</p>
+        <h3>Tu aventura de pádel comienza aquí</h3>
+        <p>Ambiente moderno y exclusivo y entrenadores cualificados.</p>
+        <h3>Tu guía personal de pádel</h3>
+        <p>Entrenadores con experiencia demostrable.</p>
+      </div>
+    </section>
 
-  <section class="seccion" id="quienes">
-    <h2>Quiénes Somos</h2>
-    <p>Somos un club deportivo dedicado al pádel, con instalaciones modernas, entrenadores certificados y un ambiente único para todos los niveles.</p>
-  </section>
+    <section id="servicios">
+      <h2>Nuestros servicios</h2>
+      <div class="servicios">
+        <div class="servicio">
+          <img src="pista1.jpeg" alt="Alquiler de pista de pádel">
+          <h4>Alquiler de pistas</h4>
+        </div>
+        <div class="servicio">
+          <img src="terraza.jpeg" alt="Zona de terraza y restauración">
+          <h4>Zona de restauración y terraza</h4>
+        </div>
+        <div class="servicio">
+          <img src="tienda.jpeg" alt="Tienda de equipamiento deportivo">
+          <h4>Tienda</h4>
+        </div>
+      </div>
+    </section>
 
-  <section class="seccion" id="caracteristicas">
-    <h2>Características</h2>
-    <ul>
-      <li>Pistas cubiertas y al aire libre</li>
-      <li>Gimnasio y área de recuperación</li>
-      <li>Eventos mensuales y torneos</li>
-    </ul>
-  </section>
+    <section id="actividades">
+      <h2>Nuestras actividades</h2>
+      <div class="actividades">
+        <div class="actividad">
+          <img src="todasedades.png" alt="Clases para todas las edades">
+          <h4>Clases para todas las edades</h4>
+        </div>
+        <div class="actividad">
+          <img src="especiales.jpeg" alt="Clases para personas con necesidades especiales">
+          <h4>Clases para personas con necesidades especiales</h4>
+        </div>
+        <div class="actividad">
+          <img src="torneo.png" alt="Torneos">
+          <h4>Torneos</h4>
+        </div>
+      </div>
+    </section>
 
-  <section class="seccion" id="precios">
-    <h2>Precios</h2>
-    <p>Consulta nuestras opciones de membresía: mensual, trimestral o anual. También puedes reservar pistas por hora.</p>
-  </section>
+    <section id="galeria">
+      <h2>Galería</h2>
+      <div class="galeria">
+        <img src="nave.png" alt="Naves" onclick="mostrarModal(this)">
+        <img src="pista2.png" alt="Pista de pádel" onclick="mostrarModal(this)">
+        <img src="pista1.jpeg" alt="Pista de pádel iluminada" onclick="mostrarModal(this)">
+        <img src="clasepadel.jpeg" alt="Clase de pádel en curso" onclick="mostrarModal(this)">
+        <img src="claseyayos.jpg" alt="Pista de pádel con jugadores" onclick="mostrarModal(this)">
+        <img src="terraza.jpeg" alt="Zona de terraza del club" onclick="mostrarModal(this)">
+        <img src="tienda.jpeg" alt="Tienda con equipamiento deportivo" onclick="mostrarModal(this)">
+        <img src="parking.png" alt="Otra pista de pádel" onclick="mostrarModal(this)">
+      </div>
+    </section>
 
-  <section class="seccion" id="contacto">
-    <h2>Contacto</h2>
-    <p>Email: contacto@puertopadel.com</p>
-    <p>Teléfono: +34 600 123 456</p>
-  </section>
+    <!-- Modal para imágenes -->
+    <div id="modal" class="modal" onclick="cerrarModal()">
+      <span class="cerrar">&times;</span>
+      <img class="modal-contenido" id="imgModal" alt="Vista ampliada">
+    </div>
+
+    <section id="precios">
+      <h2>Precios</h2>
+      <!-- Precios de pistas -->
+      <h3>Precios pistas</h3>
+      <div class="precios precios-pistas">
+        <div class="plan">
+          <h4>Alquiler pista 1 hora</h4>
+          <p>Disponibles pistas 1, 2 y 3 (consultar horario)</p>
+          <p><strong>12€/h</strong></p>
+          <a href="#" class="cta-btn" onclick="mostrarAlerta()">Reservar</a>
+        </div>
+        <div class="plan">
+          <h4>Alquiler pista 2 horas</h4>
+          <p>Disponibles pistas 1, 2 y 3 (consultar horario)</p>
+          <p><strong>20€</strong></p>
+          <a href="#" class="cta-btn" onclick="mostrarAlerta()">Reservar</a>
+        </div>
+      </div>
+
+      <!-- Precios de clases -->
+      <h3>Precios clases</h3>
+      <div class="precios precios-clases">
+        <div class="plan">
+          <h4>Clase</h4>
+          <p>Consultar horarios</p>
+          <p><strong>10€/h</strong></p>
+          <a href="#" class="cta-btn" onclick="mostrarAlerta()">Reservar</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="mapa">
+      <div class="mapa">
+        <div>
+          <h2>Ubicado en tu ciudad</h2>
+          <p>Calle Alemania nº 2, Puertollano, Ciudad Real</p>
+          <a href="#contacto" class="cta-btn">Ven a conocernos</a>
+        </div>
+        <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-4.1065%2C38.6875%2C-4.1045%2C38.6895&layer=mapnik&marker=38.6885%2C-4.1055" allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <section id="contacto">
+      <h2 style="text-align: flex-start;">Contacto</h2>
+      <div style="
+        max-width: 800px;
+        margin: 2rem auto 0 auto;
+        display: flex;
+        justify-content: flex-start;
+      ">
+        <div style="
+          padding: 2rem;
+          background: white;
+          border-radius: 15px;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+          text-align: left;
+          max-width: 450px;
+          width: 100%;
+        ">
+        <p style="margin: 0.5rem 0;">
+          <span style="color: #147533;"> <strong>Nombre:</strong></span> <em>Íker García Moreno Muñoz</em>
+        </p>
+        <p style="margin: 0.5rem 0;">
+          <span style="color: #147533;">📱 <strong>Teléfono:</strong></span> <em>+34 633 627 394</em>
+        </p>
+        <p style="margin: 0.5rem 0;">
+          <span style="color: #147533;">📧 <strong>Email:</strong></span> <em>puertopadel13500@gmail.com</em>
+        </p>
+        <p style="margin: 0.5rem 0;">
+          <span style="color: #147533;">📷 <strong>Instagram:</strong></span>
+          <a href="https://www.instagram.com/puertopadel__/" target="_blank">@puertopadel__</a>
+        </p>
+
+        <p style="margin-top: 2rem; color: #555;">Puedes contactarme por el medio que te resulte más cómodo. ¡Será un placer ayudarte!</p>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    &copy; 2025 Club de Pádel PuertoPadel. Todos los derechos reservados.
+    &copy; 2025 Club de Pádel PuertoPádel. Todos los derechos reservados.
   </footer>
 
+  <script>
+    // Modal de galería
+    function mostrarModal(imagen) {
+      var modal = document.getElementById("modal");
+      var modalImg = document.getElementById("imgModal");
+      modal.style.display = "block";
+      modalImg.src = imagen.src;
+      modalImg.alt = imagen.alt;
+    }
+
+    function cerrarModal() {
+      document.getElementById("modal").style.display = "none";
+    }
+  </script>
+  <script>
+  window.addEventListener('DOMContentLoaded', () => {
+    if (window.location.hash) {
+      // Elimina el hash de la URL y hace scroll arriba
+      history.replaceState(null, null, window.location.pathname);
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    }
+  });
+</script>
+<script>
+  function mostrarAlerta() {
+    alert("Este servicio todavía no está disponible. Puede ponerse en contacto con nosotros a través de la información en la sección Contacto.");
+  }
+</script>
+<script src="https://unpkg.com/scrollreveal"></script>
+<script>
+  ScrollReveal().reveal('section', {
+    duration: 800,
+    distance: '50px',
+    origin: 'bottom',
+    easing: 'ease-out',
+    reset: false
+  });
+</script>
 </body>
 </html>

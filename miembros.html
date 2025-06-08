@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Miembros - PuertoPádel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background-image: url("claseyayos.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      min-height: 100vh;
+      margin: 0;
+      font-family: sans-serif;
+    }
+
+    header {
+      background-color: #000;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      position: relative;
+    }
+
+    #user-icon {
+      position: absolute;
+      left: 1rem;
+      top: 1rem;
+      background-color: #4CAF50;
+      color: white;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      cursor: pointer;
+      display: none;
+    }
+
+    #user-menu {
+      position: absolute;
+      left: 1rem;
+      top: 60px;
+      background-color: white;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 0.5rem 1rem;
+      display: none;
+      z-index: 100;
+    }
+
+    #google-selector {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.9);
+      opacity: 0;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      z-index: 100;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      text-align: center;
+   }
+
+    #google-selector.mostrar {
+      display: block;
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    main {
+      padding: 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .miembros-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      gap: 2rem;
+    }
+
+    .miembro-card {
+      background-color: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      flex: 1 1 250px;
+      max-width: 300px;
+      text-align: center;
+    }
+
+    .login-button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .login-button:hover {
+      background-color: #45a049;
+    }
+
+    .login-box {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+      margin: 2rem auto;
+      display: none;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .login-btn, .google-btn {
+      width: 100%;
+      padding: 0.7rem;
+      border: none;
+      border-radius: 6px;
+      margin-top: 0.5rem;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .login-btn {
+      background: #2a8fbd;
+      color: white;
+    }
+
+    .google-btn {
+      background: #db4437;
+      color: white;
+    }
+
+    footer {
+      background-color: #2a2929;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div id="user-icon"></div>
+  <div id="user-menu">
+    <p id="bienvenida"></p>
+    <button onclick="logout()">Cerrar sesión</button>
+  </div>
+  <h1>Miembros del Club</h1>
+</header>
+
+<main>
+  <div class="miembros-container" id="contenido-publico">
+    <div class="miembro-card">
+      <h4>Socios actuales</h4>
+      <button class="login-button" onclick="mostrarLogin()">Iniciar sesión</button>
+    </div>
+    <div class="miembro-card">
+      <h4>Beneficios</h4>
+      <p>Acceso preferente, descuentos en tienda y clases exclusivas para socios.</p>
+    </div>
+    <div class="miembro-card">
+      <h4>¿Quieres unirte?</h4>
+      <p>Contáctanos o visítanos para darte de alta y empezar a disfrutar de las ventajas.</p>
+    </div>
+  </div>
+
+  <div id="fondo-blur" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; backdrop-filter: blur(5px); background: rgba(0,0,0,0.2); z-index: 99;"></div>
+
+  <div id="loginForm" class="login-box">
+    <h2>Inicia sesión</h2>
+    <input type="email" id="email" placeholder="Correo electrónico" />
+    <input type="password" placeholder="Contraseña" />
+    <button class="login-btn" onclick="login()">Iniciar sesión</button>
+    <p>O</p>
+    <button class="google-btn" onclick="abrirSelectorGoogle()" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+    <svg width="18" height="18" viewBox="0 0 533.5 544.3">
+      <path fill="#4285F4" d="M533.5 278.4c0-18.5-1.5-36.3-4.3-53.5H272v101.2h147.2c-6.4 34.4-25.3 63.5-53.9 83.1v68.9h87.1c51-47 80.1-116.3 80.1-199.7z"/>
+      <path fill="#34A853" d="M272 544.3c72.6 0 133.6-24 178.1-64.9l-87.1-68.9c-24.2 16.2-55.1 25.8-91 25.8-70.1 0-129.5-47.3-150.8-110.8H33v69.6C77.8 482.5 167.3 544.3 272 544.3z"/>
+      <path fill="#FBBC05" d="M121.2 325.5c-10.2-30-10.2-62.2 0-92.2V163.7H33c-33.5 66.9-33.5 146.9 0 213.8l88.2-52z"/>
+      <path fill="#EA4335" d="M272 107.2c39.4-.6 77.2 13.8 106.2 39.8l79.1-79.1C421.1 23.2 348.4-1.4 272 0 167.3 0 77.8 61.8 33 163.7l88.2 69.6C142.5 154.5 201.9 107.2 272 107.2z"/></svg>Iniciar con Google</button>
+  </div>
+
+  <div id="google-selector" style="display:none; background:white; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.2); padding: 1rem; max-width: 300px; text-align:center; position:absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 100;">
+    <h3>Selecciona una cuenta de Google</h3>
+    <ul style="list-style: none; padding: 0;">
+      <li><button onclick="seleccionarGoogleUser('puertopadel13500@gmail.com')" style="background:none; border:none; cursor:pointer; margin:0.5rem;">puertopadel13500@gmail.com</button></li>
+      <li><button onclick="seleccionarGoogleUser('iker@gmail.com')" style="background:none; border:none; cursor:pointer; margin:0.5rem;">iker@gmail.com</button></li>
+      <li><button onclick="seleccionarGoogleUser('entrenador@gmail.com')" style="background:none; border:none; cursor:pointer; margin:0.5rem;">entrenador@gmail.com</button></li>
+    </ul>
+    <button onclick="cerrarSelectorGoogle()" style="margin-top:1rem; background-color:#ccc; border:none; padding:0.5rem 1rem; border-radius:6px; cursor:pointer;">Cancelar</button>
+</div>
+
+</main>
+
+<footer>
+  <p><a href="index.html">Volver a inicio</a></p>
+</footer>
+
+<script>
+  function mostrarLogin() {
+    document.getElementById('loginForm').style.display = 'block';
+    document.getElementById('loginForm').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function login() {
+    const email = document.getElementById('email').value;
+    if (email.trim() === '') {
+      alert('Introduce un correo válido.');
+      return;
+    }
+
+    const username = email.split('@')[0];
+    localStorage.setItem('usuario', username);
+
+    mostrarUsuario(username);
+  }
+
+  function loginConGoogle() {
+    const username = "googleuser"; // Puedes cambiarlo por algo aleatorio si quieres
+    localStorage.setItem('usuario', username);
+    mostrarUsuario(username);
+  }
+
+  function mostrarUsuario(username) {
+    document.getElementById('loginForm').style.display = 'none';
+    document.getElementById('user-icon').style.display = 'flex';
+    document.getElementById('user-icon').textContent = username.charAt(0).toUpperCase();
+    document.getElementById('bienvenida').textContent = `Bienvenido @${username}`;
+  }
+
+  function logout() {
+    localStorage.removeItem('usuario');
+    document.getElementById('user-icon').style.display = 'none';
+    document.getElementById('user-menu').style.display = 'none';
+    document.getElementById('loginForm').style.display = 'none';
+    document.getElementById('contenido-publico').style.display = 'flex';
+  }
+
+  function abrirSelectorGoogle() {
+    const fondo = document.getElementById('fondo-blur');
+    const selector = document.getElementById('google-selector');
+    fondo.style.display = 'block';
+    selector.style.display = 'block';
+
+    // Asegura que el navegador renderice antes de aplicar la clase de animación
+    setTimeout(() => {
+      selector.classList.add('mostrar');
+    }, 10);
+  }
+
+  function cerrarSelectorGoogle() {
+    const fondo = document.getElementById('fondo-blur');
+    const selector = document.getElementById('google-selector');
+
+    selector.classList.remove('mostrar');
+    fondo.style.display = 'none';
+
+    // Espera la transición antes de ocultarlo completamente
+    setTimeout(() => {
+      selector.style.display = 'none';
+    }, 300);
+  }
+
+  function seleccionarGoogleUser(email) {
+    const username = email.split('@')[0];
+    localStorage.setItem('usuario', username);
+    cerrarSelectorGoogle();
+    mostrarUsuario(username);
+  }
+
+  document.getElementById('user-icon').addEventListener('click', () => {
+    const menu = document.getElementById('user-menu');
+    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+  });
+
+  window.onload = function () {
+    const usuario = localStorage.getItem('usuario');
+    if (usuario) {
+      mostrarUsuario(usuario);
+    }
+  };
+</script>
+</body>
+</html>
+
