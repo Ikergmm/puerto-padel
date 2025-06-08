@@ -238,12 +238,10 @@
 
     .plan {
       background-color: #f0f0f0;
-      padding: 2rem;
-      border-radius: 12px;
+      padding: 1rem;
+      border-radius: 15px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      flex: 1 1 250px;
-      width: 250px;
-      text-align: center;
+      margin-bottom: 2rem;
     }
 
     /* Colores diferentes */
@@ -255,15 +253,65 @@
       background-color: #d2e9f5; /* azul claro */
     }
 
-    /* Botón */
-    .cta-btn {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.5rem 1.2rem;
+    .plan-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      background-color: #d4ecfa;
+      padding: 1rem;
+      border-radius: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .plan-main {
+      flex: 1;
+      text-align: center;
+    }
+
+    .plan-dual {
+      display: flex;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .clase-box {
+      flex: 1;
+      background-color: #e3f2fd;
+      padding: 1rem;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .plan-extra {
+      flex: 1;
+      text-align: center;
+    }
+
+    .extra-btn {
       background-color: #007bff;
       color: white;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 0.5rem;
+    }
+
+    .extra-btn:hover {
+      background-color: #005fa3;
+    }
+        /* Botón */
+    .cta-btn {
+      background-color: #007bff;
+      color: white;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 6px;
       text-decoration: none;
-      border-radius: 5px;
+      font-weight: bold;
+      display: inline-block;
+      margin-top: 0.5rem;
     }
 
     .cta-btn:hover {
@@ -434,10 +482,76 @@
       <h3>Precios clases</h3>
       <div class="precios precios-clases">
         <div class="plan">
-          <h4>Clase</h4>
-          <p>Consultar horarios</p>
-          <p><strong>10€/h</strong></p>
-          <a href="#" class="cta-btn" onclick="mostrarAlerta()">Reservar</a>
+          <div class="plan-dual">
+            <div class="clase-box">
+              <h4>Clases para niños</h4>
+              <p>3 clases semanales</p>
+              <p>Consultar horarios</p>
+              <p><strong>45€/mes</strong></p>
+              <a href="#" class="cta-btn" onclick="mostrarAlerta()">Reservar</a>
+            </div>
+            <div class="clase-box">
+              <h4>Clases para niños con necesidades especiales</h4>
+              <p>3 clases semanales</p>
+              <p>Consultar horarios</p>
+              <p><strong>35€/mes</strong></p>
+              <a href="#" class="cta-btn" onclick="mostrarAlerta()">Reservar</a>
+            </div>
+          </div>
+        </div>
+        <div class="plan">
+          <div class="plan-dual">
+            <div class="clase-box">
+              <h4>Clases para jóvenes</h4>
+              <p>3 clases semanales</p>
+              <p>Consultar horarios</p>
+              <p><strong>50€/mes</strong></p>
+              <a href="#" class="cta-btn" onclick="mostrarAlerta()">Reservar</a>
+            </div>
+            <div class="clase-box">
+              <h4>Clases para jóvenes con necesidades especiales</h4>
+              <p>3 clases semanales</p>
+              <p>Consultar horarios</p>
+              <p><strong>40€/mes</strong></p>
+              <a href="#" class="cta-btn" onclick="mostrarAlerta()">Reservar</a>
+            </div>
+          </div>
+        </div>
+        <div class="plan">
+          <div class="plan-dual">
+            <div class="clase-box">
+              <h4>Clases para adultos</h4>
+              <p>3 clases semanales</p>
+              <p>Consultar horarios</p>
+              <p><strong>55€/mes</strong></p>
+              <a href="#" class="cta-btn" onclick="mostrarAlerta()">Reservar</a>
+            </div>
+            <div class="clase-box">
+              <h4>Clases para adultos con necesidades especiales</h4>
+              <p>3 clases semanales</p>
+              <p>Consultar horarios</p>
+              <p><strong>45€/mes</strong></p>
+              <a href="#" class="cta-btn" onclick="mostrarAlerta()">Reservar</a>
+            </div>
+          </div>
+        </div>
+        <div class="plan">
+          <div class="plan-dual">
+            <div class="clase-box">
+              <h4>Clases para adultos mayores</h4>
+              <p>3 clases semanales</p>
+              <p>Consultar horarios</p>
+              <p><strong>45€/mes</strong></p>
+              <a href="#" class="cta-btn" onclick="mostrarAlerta()">Reservar</a>
+            </div>
+            <div class="clase-box">
+              <h4>Clases para adultos mayores con necesidades especiales</h4>
+              <p>2 clases semanales</p>
+              <p>Consultar horarios</p>
+              <p><strong>35€/mes</strong></p>
+              <a href="#" class="cta-btn" onclick="mostrarAlerta()">Reservar</a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
